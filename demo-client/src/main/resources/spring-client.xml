@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <context:property-placeholder location="classpath:system.properties"/>
+    <!--客户端配置-->
+    <bean id="rpcClient" class="com.yingjun.rpc.client.RPCClient">
+        <constructor-arg name="zookeeper" value="${zookeeper.address}"/>
+        <!--订阅需要用到的接口-->
+        <constructor-arg name="interfaces">
+            <list>
+                <value>com.yingjun.rpc.service.OrderService</value>
+                <value>com.yingjun.rpc.service.UserService</value>
+                <value>com.yingjun.rpc.service.GoodsService</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>
